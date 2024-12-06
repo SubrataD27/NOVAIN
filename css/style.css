@@ -1132,6 +1132,7 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  
 }
 @supports (padding-top: clamp( 7.125rem , -3.1735074627rem  +  17.1641791045vw , 10rem )) {
   .footer__wrapper {
