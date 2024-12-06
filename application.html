@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Application</title>
+    <!-- Bootstrap CSS link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 165, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        .form-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #FFA500;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #FFA500;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+        }
+        .form-control {
+            border-radius: 10px;
+        }
+        .footer {
+            text-align: center;
+            color: #bbb;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="form-title">Internship Application</h1>
+        <form id="application-form">
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+            </div>
+            <!-- Email Address -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+            </div>
+            <!-- University -->
+            <div class="form-group">
+                <label for="university">University</label>
+                <input type="text" class="form-control" id="university" placeholder="Enter your university name" required>
+            </div>
+            <!-- Applied Domain -->
+            <div class="form-group">
+                <label for="domain">Applied Domain</label>
+                <select class="form-control" id="domain" required>
+                    <option value="" disabled selected>Select your domain</option>
+                    <option value="Full-Stack Web Developer">Full-Stack Web Developer</option>
+                    <option value="Frontend Developer">Frontend Developer</option>
+                    <option value="UI/UX Designer">UI/UX Designer</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="AI/ML">AI/ML</option>
+                    <option value="Cyber Security">Cyber Security</option>
+                </select>
+            </div>
+            <!-- Terms & Conditions -->
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="terms" required>
+                <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
+            </div>
+            <!-- Submit Button -->
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Apply</button>
+            </div>
+            <!-- Message Display -->
+            <div id='message' class='text-center mt-3'></div>
+        </form>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Made with ❤️ by Novain Developers</p>
+            <p>&copy; 2024 NOVAIn Training & Consultancy Services</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (needed for Bootstrap's functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js"></script>
+
+    <script type="module">
+        // Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDsWjCnzrzTJX2E7PcpSx4zXnOzJRkozYs",
+          authDomain: "novain-2024.firebaseapp.com",
+          projectId: "novain-2024",
+          storageBucket: "novain-2024.appspot.com",
+          messagingSenderId: "588797361086",
+          appId: "1:588797361086:web:1b805fb9cbad7fdef217ef",
+        };
+
+        // Initialize Firebase
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js';
+        import { getFirestore, setDoc, doc } from 'https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js';
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Form submission handling
+        document.getElementById('application-form').addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          const fullName = document.getElementById('fullName').value;
+          const email = document.getElementById('email').value;
+          const university = document.getElementById('university').value;
+          const domain = document.getElementById('domain').value;
+
+          if (document.getElementById('terms').checked) {
+              // Try to create a user
+              const password = generateRandomPassword();
+              createUserWithEmailAndPassword(auth, email, password)
+                  .then((userCredential) => {
+                      const user = userCredential.user;
+
+                      // Send email verification
+                      sendEmailVerification(user)
+                          .then(() => {
+                              console.log("Verification email sent.");
+                              document.getElementById('message').innerHTML = `<p>Thank you for applying, ${fullName}. A confirmation email has been sent to ${email}.</p>`;
+                          })
+                          .catch((error) => {
+                              console.error("Error sending verification email:", error);
+                              alert("There was an issue sending the confirmation email. Please try again later.");
+                          });
+
+                      // Store additional user data in Firestore
+                      storeUserData(user.uid, fullName, email, university, domain);
+                      console.log('User registered:', user);
+
+                      // Clear the form after submission
+                      document.getElementById('application-form').reset();
+                  })
+                  .catch((error) => {
+                      if (error.code === 'auth/email-already-in-use') {
+                          // If the email is already in use, inform the user
+                          document.getElementById('message').innerHTML = `<p>This email is already registered. A verification email has been sent to ${email}.</p>`;
+                      } else {
+                          console.error(error.code, error.message);
+                          alert("Error during registration.... Please try again.");
+                      }
+                  });
+          } else {
+              alert('Please agree to the terms and conditions.');
+          }
+      });
+
+      function generateRandomPassword() {
+          return Math.random().toString(36).slice(-8); // Generates an 8-character random password
+      }
+
+      function storeUserData(uid, fullName, email, university, domain) {
+          // Store user data in Firestore
+          setDoc(doc(db, 'users', uid), {
+              fullName,
+              email,
+              university,
+              domain,
+              timestamp: new Date() // Automatically sets current date/time
+          })
+          .then(() => {
+              console.log("User data saved successfully!");
+          })
+          .catch((error) => {
+              console.error("Error saving user data:", error);
+          });
+      }
+    </script>
+
+</body>
+</html>
