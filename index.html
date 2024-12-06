@@ -25,9 +25,9 @@
 					<a class="header__logo" href="index.html"><picture><source srcset="img/logo.webp" type="image/webp"><img src="img/logo.png" alt="kron logo"></picture></a>
 					<nav class="header__menu menu">
 						<ul class="menu__items">
-							<li class="menu__item"><a href="index.html">about us.</a></li>
-							<li class="menu__item"><a href="careers.html">careers.</a></li>
-							<li class="menu__item"><a href="contacts.html">contacts.</a></li>
+							<li class="menu__item"><a href="index.html">About Us</a></li>
+							<li class="menu__item"><a href="careers.html">Careers</a></li>
+							<li class="menu__item"><a href="contacts.html">Contacts</a></li>
 							<li class="menu__item menu__item_gradient"><a href="kronstories.html">#NOVAinstories</a></li>
 						</ul>
 					</nav>
@@ -505,6 +505,13 @@
 		e.preventDefault();
 	  }
 	});
+	document.addEventListener('keydown', function(e) { 
+        // Check for Ctrl + U 
+        if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) { 
+            e.preventDefault(); 
+        } 
+        // Add more shortcuts as needed 
+    }); 
   </script>
   
 
