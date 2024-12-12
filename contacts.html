@@ -1,92 +1,242 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Contacts</title>
-	<meta charset="UTF-8">
-	<meta name="format-detection" content="telephone=no">
-	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css?_v=20230327195509" />
-	<link rel="stylesheet" href="css/style.min.css?_v=20230327195509">
-	<link rel="shortcut icon" href="favicon.ico">
-	<!-- <meta name="robots" content="noindex, nofollow"> -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css?_v=20230327195509" />
+    <link rel="stylesheet" href="css/style.min.css?_v=20230327195509">
+    <link rel="shortcut icon" href="favicon.ico">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e7eaf6;
+            color: #113f67;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #113f67;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #38598b;
+        }
+
+        .wrapper_contacts {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #113f67;
+            padding: 20px 40px;
+            color: #e7eaf6;
+        }
+
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header__logo img {
+            max-height: 50px;
+        }
+
+        .header__menu .menu__items {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .header__menu .menu__item a {
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        .header__menu .menu__item a:hover {
+            background-color: #38598b;
+            color: #e7eaf6;
+        }
+
+        .contacts__container {
+            padding: 50px 20px;
+        }
+
+        .contacts__title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #113f67;
+        }
+
+        .contacts__map iframe {
+            width: 100%;
+            max-width: 900px;
+            height: 450px;
+            border: none;
+            border-radius: 8px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .contacts__text {
+            text-align: center;
+            margin: 20px auto;
+            font-size: 1.2rem;
+        }
+
+        .contacts__text a {
+            color: #38598b;
+            font-weight: bold;
+        }
+
+        .contacts__get-in-touch {
+            background-color: #113f67;
+            color: #e7eaf6;
+            padding: 40px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        .contacts__get-in-touch h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contacts__get-in-touch form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contacts__get-in-touch .form-group {
+            margin-bottom: 15px;
+        }
+
+        .contacts__get-in-touch label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .contacts__get-in-touch input,
+        .contacts__get-in-touch textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .contacts__get-in-touch button {
+            width: 100%;
+            padding: 10px;
+            background-color: #38598b;
+            color: #e7eaf6;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contacts__get-in-touch button:hover {
+            background-color: #e7eaf6;
+            color: #113f67;
+        }
+
+        .footer {
+            background-color: #113f67;
+            color: #e7eaf6;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        .footer__menu a {
+            color: #e7eaf6;
+            font-weight: 500;
+            margin: 0 15px;
+        }
+
+        .footer__menu a:hover {
+            color: #38598b;
+        }
+    </style>
 </head>
 
 <body>
-	<div class="wrapper wrapper_contacts">
-		<header class="header">
-			<div class="header__container">
-				<div class="header__wrapper">
-					<a class="header__logo" href="index.html"><picture><source srcset="img/logo.webp" type="image/webp"><img src="img/logo.png" alt="kron logo"></picture></a>
-					<nav class="header__menu menu">
-						<ul class="menu__items">
-							<li class="menu__item"><a href="index.html">About us</a></li>
-							<li class="menu__item"><a href="careers.html">Careers</a></li>
-							<li class="menu__item"><a href="contacts.html">Contacts</a></li>
-							<li class="menu__item menu__item_gradient"><a href="kronstories.html">#NOVAinstories</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</header>
-		<main class="contacts">
-			<div class="contacts__container">
-				<div class="contacts__wrapper">
+    <div class="wrapper wrapper_contacts">
+        <!-- Header -->
+        <header class="header">
+            <div class="header__container">
+                <a class="header__logo" href="index.html">
+                    <img src="img/logo.png" alt="NOVAin Logo">
+                </a>
+                <nav class="header__menu">
+                    <ul class="menu__items">
+                        <li class="menu__item"><a href="index.html">About us</a></li>
+                        <li class="menu__item"><a href="careers.html">Careers</a></li>
+                        <li class="menu__item"><a href="contacts.html">Contacts</a></li>
+                        <li class="menu__item menu__item_gradient"><a href="kronstories.html">#NOVAinstories</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
-					<div class="contacts__title title title_big">
-						contacts<span class="text-accent_orange">/</span>
-					</div>
+        <!-- Main Content -->
+        <main class="contacts__container">
+            <div class="contacts__title">
+                Contacts<span class="text-accent_orange">/</span>
+            </div>
+            <div class="contacts__map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.3732833172035!2d83.82847210999522!3d19.04731865279945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3c96658f8652ad%3A0x7dafcb1b8586f019!2sGIET%20University!5e0!3m2!1sen!2sin!4v1733430260228!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div class="contacts__text">
+                Email: <a href="mailto:info@NOVAindev.com">info@NOVAindev.com</a><br>
+                СЕО: Bibhash Ranjan Panda<br>
+                India, Odisha
+            </div>
 
-					<div class="contacts__map map">Map loading...
-						<iframe width="600" height="450" style="border:0;" loading="lazy" allowfullscreen
-							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.3732833172035!2d83.82847210999522!3d19.04731865279945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3c96658f8652ad%3A0x7dafcb1b8586f019!2sGIET%20University!5e0!3m2!1sen!2sin!4v1733430260228!5m2!1sen!2sin"
-							width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-							referrerpolicy="no-referrer-when-downgrade">
-						</iframe>
+            <!-- Get in Touch Section -->
+            <div class="contacts__get-in-touch">
+                <h2>Get in Touch</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="5" placeholder="Your message" required></textarea>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </main>
 
-					</div>
-
-					<div class="contacts__text">
-						Email: <a href="mailto:info@NOVAindev.com" target="_blank">info@NOVAindev.com</a><br>
-						СЕО: Bibhash Ranjan Panda<br>
-						India, Odisha
-					</div>
-				</div>
-			</div>
-
-		</main>
-		<footer class="footer">
-			<div class="footer__container">
-				<div class="footer__wrapper">
-					<nav class="footer__menu menu-footer">
-						<ul class="menu-footer__items">
-							<!-- <li class="menu-footer__item"><a href="index.html">about us.</a></li>
-							<li class="menu-footer__item"><a href="careers.html">careers.</a></li>
-							<li class="menu-footer__item"><a href="contacts.html">contacts.</a></li> -->
-							<li class="menu-footer__item menu-footer__item_gradient"><a href="kronstories.html">Made with ❤️ by Novain Developers</a></li>
-						</ul>
-					</nav>
-					<div class="footer__copyright">Copyright Reserved ©2024 NOVAin Training & Consultancy Services</div>
-				</div>
-			</div>
-		</footer>
-	</div>
-
-	<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js?_v=20230327195509"></script>
-	<script src="https://cdn.jsdelivr.net/gh/dixonandmoe/rellax@master/rellax.min.js?_v=20230327195509"></script>
-	<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12?_v=20230327195509"></script>
-
-	<script src="js/app.min.js?_v=20230327195509"></script>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer__menu">
+                <a href="index.html">About us</a> | 
+                <a href="careers.html">Careers</a>
+            </div>
+            <p>Made with ❤️ by NOVAin Developers</p>
+            <p>Copyright Reserved ©2024 NOVAin Training & Consultancy Services</p>
+        </footer>
+    </div>
 </body>
-<script>
-	document.addEventListener('contextmenu', (e) => e.preventDefault());
-	document.addEventListener('keydown', (e) => {
-	  if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {
-		e.preventDefault();
-	  }
-	});
-  </script>
-  
 
-</html> -->
+</html>
